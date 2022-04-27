@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="15.css">
+</head>
+<body>
+    <h1>15-ös játék</h1>
+    <div class="container">
+        <div class="row">
+            <script>
+              szamok = [];
+              for (i=0; i<15; i++){  
+                    var veletlen = Math.floor(Math.random()*15)+1;
+                    while (szamok.includes(veletlen)) {
+                        veletlen = Math.floor(Math.random()*15)+1;
+                    }
+                    szamok[i] = veletlen;
+                    document.write(`<button id="${veletlen}" style="top: ${Math.floor(i/4)*80}px; left: ${(i%4)*80}px;" s="${Math.floor(i/4)}" o="${i%4}" onclick="mozgat(${veletlen})">${veletlen}</button>`);
+                    if (i % 4 == 3)
+                        document.write('<br>');
+                }
+                row = 3;
+                column = 3;
+              function mozgat(i) {
+                  oszlop = document.getElementById(i.toString()).getAttribute('o');
+                  sor = document.getElementById(i.toString()).getAttribute('s');
+                  if ((sor == row && Math.abs(oszlop-column) == 1) || Math.abs(sor-row)==1 && oszlop == column){
+                    document.getElementById(i.toString()).style.top = ((parseInt(row)) * 80) +'px';
+                    document.getElementById(i.toString()).style.left = ((parseInt(column)) * 80) +'px';
+                    document.getElementById(i.toString()).setAttribute('o', column);
+                    document.getElementById(i.toString()).setAttribute('s', row);
+                    row = sor;
+                    column = oszlop;
+                  }
+              }                
+            </script>
+        </div>
+    </div>
+</body>
+</html>
